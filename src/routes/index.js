@@ -16,6 +16,7 @@ const RecommendComponent = lazy(() => import("../application/Recommend/"));
 const SingersComponent = lazy(() => import("../application/Singers/"));
 const RankComponent = lazy(() => import("../application/Rank/"));
 const AlbumComponent = lazy(() => import("../application/Album/"));
+const VideoComponent = lazy(() => import("../application/Video/"));
 const SingerComponent = lazy(() => import("./../application/Singer/"));
 const SearchComponent = lazy(() => import("./../application/Search/"));
 const userCenterComponent = lazy(() => import("../application/UserCenter/"));
@@ -35,15 +36,20 @@ export default [
           {
             path: "/",
             exact: true,
-            render: () => <Redirect to={"/recommend"} />
+            render: () => <Redirect to={"/login"} />
           },
           {
             path: "/recommend",
             component: SuspenseComponent(RecommendComponent),
+            key: "recommend",
             routes: [
               {
-                path: "/recommend/:id",
-                component: SuspenseComponent(AlbumComponent)
+                path: "/recommend/music/:id",
+                component: SuspenseComponent(AlbumComponent),
+              },
+              {
+                path: "/recommend/video/:id",
+                component: SuspenseComponent(VideoComponent),
               }
             ]
           },

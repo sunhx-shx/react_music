@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Slider from '../../components/slider/';
 import { connect } from "react-redux";
 import * as actionTypes from './store/actionCreators';
@@ -11,9 +11,15 @@ import { EnterLoading } from './../Singers/style';
 import Loading from '../../baseUI/loading-v2/index';
 
 function Recommend(props){
-  const { bannerList, loginStatus, history, recommendList, songsCount, enterLoading } = props;
+  const {  loginStatus, history, bannerList, recommendList, recommendMvList, songsCount, enterLoading } = props;
 
-  const { getBannerDataDispatch, getRecommendListDataDispatch } = props;
+  const { getBannerDataDispatch, getRecommendListDataDispatch, getRecommendMusicVideoListDataDispatch } = props;
+
+  const [status, setStatus] = useState(true);
+
+  const [listStatus, setListStatus] = useState(true);
+
+  const test = useRef();
 
   useEffect(() => {
     if(!bannerList.size){
@@ -22,24 +28,28 @@ function Recommend(props){
     if(!recommendList.size){
       getRecommendListDataDispatch();
     }
+    if(!recommendMvList.size){
+      getRecommendMusicVideoListDataDispatch();
+    }
     // eslint-disable-next-line
   }, []);
 
-  // useEffect(() => {
-  //   if (!loginStatus) {
-  //     history.push("/login");
-  //   }
-  // }, [loginStatus, history]);
+  useEffect(() => {
+    if (!loginStatus) {
+      history.push("/login");
+    }
+  }, [loginStatus, history]);
 
   const bannerListJS = bannerList ? bannerList.toJS() : [];
   const recommendListJS = recommendList ? recommendList.toJS() :[];
+  const recommendMusicVideoListJS = recommendMvList ? recommendMvList.toJS() :[];
 
   return (
     <Content play={songsCount}>
-      <Scroll className="list" onScroll={forceCheck}>
+      <Scroll className="list" ref={test} onScroll={forceCheck}>
         <div>
-          <Slider bannerList={bannerListJS}></Slider>
-          <RecommendList recommendList={recommendListJS}></RecommendList>
+          <Slider bannerList={bannerListJS}/>
+          <RecommendList recommendList={recommendListJS} recommendMusicVideoList={recommendMusicVideoListJS}/>
         </div>
       </Scroll>
       {enterLoading? <EnterLoading><Loading></Loading></EnterLoading> : null}
@@ -53,6 +63,7 @@ const mapStateToProps = (state) => ({
   loginStatus: state.getIn(["user", "loginStatus"]),
   bannerList: state.getIn(['recommend', 'bannerList']),
   recommendList: state.getIn(['recommend', 'recommendList']),
+  recommendMvList: state.getIn(['recommend', 'recommendMvList']),
   songsCount: state.getIn(['player', 'playList']).size,
   enterLoading: state.getIn(['recommend', 'enterLoading'])
 });
@@ -64,6 +75,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     getRecommendListDataDispatch() {
       dispatch(actionTypes.getRecommendList());
+    },
+
+    getRecommendMusicVideoListDataDispatch() {
+      dispatch(actionTypes.getRecommendMusicVideoList());
     },
 
   }

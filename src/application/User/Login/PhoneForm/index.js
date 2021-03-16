@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Header, Container } from "./style";
 import { trimPhone } from "../../../../api/utils";
 import StepOne from "./step-one";
+import StepTwo from "./step-two";
 import StepPassWorld from "./step-password";
 
 const PhoneForm = props => {
@@ -18,7 +19,7 @@ const PhoneForm = props => {
   );
 
   const changeLoginType = () => {
-    changeLogin();
+    changeLogin(trimPhone(phone));
   };
 
   //切换手机号码和验证码表单
@@ -45,7 +46,6 @@ const PhoneForm = props => {
   };
 
   const changeVal = (val) => {
-      console.log(val);
       setPassWord(val);
   };
 
@@ -53,7 +53,7 @@ const PhoneForm = props => {
   const debounceHandler = debounce(changeVal);
 
   //防抖函数
-  function debounce(fn, ms = 500) {
+  function debounce(fn, ms = 300) {
     let timeoutId;
     return function () {
       clearTimeout(timeoutId);
@@ -90,7 +90,6 @@ const PhoneForm = props => {
           onChangePassWord={ (e) => onChangePassWord(e)}
           triggerLogin={triggerLogin}
           passWord={passWord}
-          reSentVcode={triggerSentVcode}
         />
       )}
     </Container>

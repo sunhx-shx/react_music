@@ -65,8 +65,8 @@ export const CollectButton = styled.div`
   .iconfont{
     display: inline-block;
     margin-right: 10px;
-    font-size: 12px;
-    vertical-align: 1px;
+    font-size: 20px;
+    vertical-align: -2px;
   }
   .text {
     display: inline-block;

@@ -67,11 +67,11 @@ function NormalPlayer(props) {
   const getPlayMode = () => {
     let content;
     if (mode === playMode.sequence) {
-      content = "&#xe625;";
+      content = "&#59229;";
     } else if (mode === playMode.loop) {
-      content = "&#xe653;";
+      content = "&#59042;";
     } else {
-      content = "&#xe61b;";
+      content = "&#59098;";
     }
     return content;
   };
@@ -178,7 +178,7 @@ function NormalPlayer(props) {
         <div className="background layer"></div>
         <Top className="top">
           <div className="back" onClick={() => toggleFullScreenDispatch(false)}>
-            <i className="iconfont icon-back">&#xe662;</i>
+            <i className="iconfont icon-back">&#xe61a;</i>
           </div>
           <div className="text">
             <h1 className="title">{song.name}</h1>
@@ -252,9 +252,9 @@ function NormalPlayer(props) {
             {
               list.map((item) => {
                 return (
-                  <ListItem 
+                  <ListItem
                     key={item.key}
-                    className={`${speed === item.key ? 'selected': ''}`} 
+                    className={`${speed === item.key ? 'selected': ''}`}
                     onClick={() => clickSpeed(item.key)}>
                       {item.name}
                   </ListItem>
@@ -280,25 +280,25 @@ function NormalPlayer(props) {
               ></i>
             </div>
             <div className="icon i-left" onClick={handlePrev}>
-              <i className="iconfont">&#xe6e1;</i>
+              <i className="iconfont">&#58887;</i>
             </div>
             <div className="icon i-center">
               <i
                 className="iconfont"
                 onClick={clickPlayingCB}
                 dangerouslySetInnerHTML={{
-                  __html: playing ? "&#xe723;" : "&#xe731;"
+                  __html: playing ? "&#58937;" : "&#xe710;"
                 }}
               ></i>
             </div>
             <div className="icon i-right" onClick={handleNext}>
-              <i className="iconfont">&#xe718;</i>
+              <i className="iconfont">&#58902;</i>
             </div>
             <div
               className="icon i-right"
               onClick={() => togglePlayListDispatch(true)}
             >
-              <i className="iconfont">&#xe640;</i>
+              <i className="iconfont" style={{ fontSize: '22px' }}>&#xe640;</i>
             </div>
           </Operators>
         </Bottom>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getRankList } from './store/index'
 import Loading from '../../baseUI/loading';
 import {
-  List, 
+  List,
   ListItem,
   SongList,
   Container
@@ -56,7 +56,7 @@ function Rank(props) {
             </ListItem>
           )
        })
-      } 
+      }
       </List>
     )
   }
@@ -75,7 +75,7 @@ function Rank(props) {
             { renderRankList(globalList, true) }
           { loading ? <EnterLoading><Loading></Loading></EnterLoading> : null }
         </div>
-      </Scroll> 
+      </Scroll>
       {renderRoutes(props.route.routes)}
     </Container>
     );

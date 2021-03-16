@@ -115,7 +115,7 @@ function PlayList(props) {
 
   const handleShowClear = () => {
     confirmRef.current.show();
-  } 
+  }
 
   const handleConfirmClear = () => {
     clearDispatch();
@@ -125,7 +125,7 @@ function PlayList(props) {
 
   const getFavoriteIcon = (item) => {
     return (
-      <i className="iconfont">&#xe601;</i>
+        <i className="iconfont" style={{ fontSize: '20px' }}>&#xe601;</i>
     )
   }
 
@@ -141,13 +141,13 @@ function PlayList(props) {
   const getPlayMode = () => {
     let content, text;
     if(mode === playMode.sequence) {
-      content = "&#xe625;";
+      content = "&#59229;";
       text = "顺序播放";
     } else if(mode === playMode.loop) {
-      content = "&#xe653;";
+      content = "&#59042;";
       text = "单曲循环";
     } else {
-      content = "&#xe61b;";
+      content = "&#59098;";
       text = "随机播放";
     }
     return (
@@ -162,7 +162,7 @@ function PlayList(props) {
     setIsShow(true);
     listWrapperRef.current.style[transform] = `translate3d(0, 100%, 0)`;
   }, [transform]);
- 
+
   const onEnteringCB = useCallback(() => {
     listWrapperRef.current.style["transition"] = "all 0.3s";
     listWrapperRef.current.style[transform] = `translate3d(0, 0, 0)`;
@@ -171,7 +171,7 @@ function PlayList(props) {
   const onExitCB = useCallback(() => {
     listWrapperRef.current.style[transform] = `translate3d(0, ${distance}px, 0)`;
   }, [distance,transform]);
- 
+
   const onExitingCB = useCallback(() => {
     listWrapperRef.current.style["transition"] = "all 0.3s";
     listWrapperRef.current.style[transform] = `translate3d(0px, 100%, 0px)`;
@@ -183,9 +183,9 @@ function PlayList(props) {
   }, [transform]);
 
   return (
-    <CSSTransition 
-      in={showPlayList} 
-      timeout={300} 
+    <CSSTransition
+      in={showPlayList}
+      timeout={300}
       classNames="list-fade"
       onEnter={onEnterCB}
       onEntering={onEnteringCB}
@@ -193,14 +193,14 @@ function PlayList(props) {
       onExiting={onExitingCB}
       onExited={onExitedCB}
     >
-      <PlayListWrapper 
-        ref={playListRef} 
-        style={isShow === true ? { display: "block" } : { display: "none" }} 
+      <PlayListWrapper
+        ref={playListRef}
+        style={isShow === true ? { display: "block" } : { display: "none" }}
         onClick={() => togglePlayListDispatch(false)}
       >
-        <div 
-          className="list_wrapper" 
-          ref={listWrapperRef} 
+        <div
+          className="list_wrapper"
+          ref={listWrapperRef}
           onClick={e => e.stopPropagation()}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -209,12 +209,12 @@ function PlayList(props) {
           <ListHeader>
             <h1 className="title">
               { getPlayMode() }
-              <span className="iconfont clear" onClick={handleShowClear}>&#xe63d;</span>
+              <span className="iconfont clear" onClick={handleShowClear}>&#xe67d;</span>
             </h1>
           </ListHeader>
           <ScrollWrapper>
-            <Scroll 
-              ref={listContentRef} 
+            <Scroll
+              ref={listContentRef}
               onScroll={pos => handleScroll(pos)}
               bounceTop={false}
             >
@@ -229,7 +229,7 @@ function PlayList(props) {
                           {getFavoriteIcon(item)}
                         </span>
                         <span className="delete" onClick={(e) => handleDeleteSong(e, item)}>
-                          <i className="iconfont">&#xe63d;</i>
+                          <i className="iconfont" style={{ fontSize: '15px' }}>&#xe60a;</i>
                         </span>
                       </li>
                     )

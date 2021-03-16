@@ -18,7 +18,7 @@ export const SongList = styled.div`
       color: ${style["font-color-desc"]};
       .iconfont {
         font-size: 24px;
-        margin-right: 10px;
+        margin-right: 20px;
         vertical-align: top;
       }
       .sum{

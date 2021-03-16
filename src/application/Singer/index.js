@@ -19,9 +19,9 @@ function Singer(props) {
 
   const OFFSET = 5;
 
-  const { 
-    artist: immutableArtist, 
-    songs: immutableSongs, 
+  const {
+    artist: immutableArtist,
+    songs: immutableSongs,
     loading,
     songsCount
   } = props;
@@ -117,7 +117,7 @@ function Singer(props) {
           <div className="filter"></div>
         </ImgWrapper>
         <CollectButton ref={collectButton}>
-          <i className="iconfont">&#xe62d;</i>
+          <i className="iconfont">&#xe7eb;</i>
           <span className="text">收藏</span>
         </CollectButton>
         <BgLayer ref={layer}></BgLayer>

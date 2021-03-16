@@ -5,8 +5,42 @@ export const getBannerRequest = () => {
 };
 
 export const getRecommendListRequest = () => {
-  return axiosInstance.get("/personalized");
+  return axiosInstance.get("/personalized?limit=30");
 };
+
+export const getRecommendMusicVideoListRequest = () => {
+  return axiosInstance.get("/personalized/mv");
+};
+
+export const getMusicVideoDetail = (id) => {
+  return axiosInstance.get(`/mv/detail?mvid=${id}`);
+};
+
+export const getMusicVideoData = (id) => {
+  return axiosInstance.get(`/mv/url?id=${id}`);
+};
+
+export const getMusicVideoInfoData = (id) => {
+  return axiosInstance.get(`/mv/detail/info?mvid=${id}`);
+};
+
+export const getSimilarMusicVideo = (id) => {
+  return axiosInstance.get(`/simi/mv?mvid=${id}`);
+};
+
+export const getMusicVideoComment = (id, pageData) => {
+  if(pageData) {
+    return axiosInstance.get(`/comment/mv?id=${id}&before=${pageData}`);
+  }else {
+    return axiosInstance.get(`/comment/mv?id=${id}`);
+  }
+};
+
+export const getHotMusicVideoComment = (id, pageData) => {
+    return axiosInstance.get(`/comment/hot?id=${id}&type=1&before=${pageData}`);
+};
+
+
 
 export const getHotSingerListRequest = count => {
   return axiosInstance.get(`/top/artists?offset=${count}`);

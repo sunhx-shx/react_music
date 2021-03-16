@@ -27,18 +27,21 @@ function Home(props) {
       <Container>
         <div>
           <Top>
-        <span
-          className="iconfont menu"
-          onClick={ () => props.history.push("/userCenter") }
-        >
-          &#xe65c;
-        </span>
+            <span
+              className="iconfont menu"
+              style={{ fontSize: "27px" }}
+              onClick={ () => props.history.push("/userCenter") }
+            >
+              &#xeb36;
+            </span>
+
             <span className="title">云音悦</span>
+
             <span
               className="iconfont search"
               onClick={() => props.history.push("/search")}
             >
-          &#xe62b;
+          &#xe63a;
         </span>
           </Top>
           <Tab>

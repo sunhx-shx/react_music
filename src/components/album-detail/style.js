@@ -116,7 +116,7 @@ export const Menu = styled.div`
     z-index:1000;
     font-weight: 500;
     .iconfont {
-      font-size: 20px;
+      font-size: 26px;
     }
   }
 `

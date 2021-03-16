@@ -28,7 +28,7 @@ const SongsList = React.forwardRef((props, refs)=> {
     changeSequecePlayListDispatch(songs);
     changeCurrentIndexDispatch(index);
     musicAnimation(e.nativeEvent.clientX, e.nativeEvent.clientY);
-  }
+  };
 
   let songList = (list) => {
     let res = [];
@@ -55,7 +55,7 @@ const SongsList = React.forwardRef((props, refs)=> {
   const collect = (count) => {
     return  (
       <div className="add_list">
-        <i className="iconfont">&#xe62d;</i>
+        <i className="iconfont">&#xe7eb;</i>
         <span>收藏({Math.floor(count/1000)/10}万)</span>
       </div>
       // <div className="isCollected">
@@ -67,7 +67,7 @@ const SongsList = React.forwardRef((props, refs)=> {
     <SongList ref={refs} showBackground={props.showBackground}>
       <div className="first_line">
         <div className="play_all" onClick={(e) => selectItem(e, 0)}>
-          <i className="iconfont">&#xe6e3;</i>
+          <i className="iconfont">&#xe608;</i>
           <span>播放全部 <span className="sum">(共{totalCount}首)</span></span>
         </div>
         { showCollect ? collect(collectCount) : null}
@@ -85,7 +85,7 @@ const mapStateToProps = (state) => ({
   fullScreen: state.getIn(['player', 'fullScreen']),
   playing: state.getIn(['player', 'playing']),
   currentSong: state.getIn(['player', 'currentSong']),
-  scrollY: state.getIn(['album', 'scrollY'])  
+  scrollY: state.getIn(['album', 'scrollY'])
 });
 // 映射dispatch到props上
 const mapDispatchToProps = (dispatch) => {

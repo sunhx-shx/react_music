@@ -4,7 +4,7 @@ import { fromJS } from "immutable";
 const defaultState = fromJS({
   userInfo: {},
   sentStatus: false,
-  loginStatus: false
+  loginStatus: true
 });
 
 export default (state = defaultState, action) => {

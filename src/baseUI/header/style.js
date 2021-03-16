@@ -13,7 +13,7 @@ export const HeaderContainer = styled.div`
   background-color: ${ props => props.addColor? style["theme-color"] : "" };
   color: ${  props => props.addColor? "#ffffff" : style["font-color-light"] };
   .back{
-    margin-right: 5px;
+    margin-left: 5px;
     font-size: 20px;
     width: 20px;
   }

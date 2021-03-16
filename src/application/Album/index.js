@@ -75,19 +75,14 @@ function Album(props) {
       >
         <Container play={songsCount}>
           <Header ref={headerEl} title={title} handleClick={handleBack} isMarquee={isMarquee}></Header>
-          {
-            !isEmptyObject(currentAlbumJS) ? (
-              <Scroll
-                onScroll={handleScroll}
-                pullUp={handlePullUp}
-                pullUpLoading={pullUpLoading}
-                bounceTop={false}
-              >
-                <AlbumDetail currentAlbum={currentAlbumJS} pullUpLoading={pullUpLoading} musicAnimation={musicAnimation}></AlbumDetail>
-              </Scroll>
-            ) : null
-          }
-          { enterLoading ?  <EnterLoading><Loading></Loading></EnterLoading> : null}
+          { enterLoading ?  <EnterLoading><Loading></Loading></EnterLoading> : <Scroll
+            onScroll={handleScroll}
+            pullUp={handlePullUp}
+            pullUpLoading={pullUpLoading}
+            bounceTop={false}
+          >
+              { Object.keys(currentAlbumJS).length > 0? <AlbumDetail currentAlbum={currentAlbumJS} pullUpLoading={pullUpLoading} musicAnimation={musicAnimation}></AlbumDetail> : null }
+          </Scroll>}
           <MusicNote ref={musicNoteRef}></MusicNote>
         </Container>
       </CSSTransition>

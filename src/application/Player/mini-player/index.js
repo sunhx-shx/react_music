@@ -20,10 +20,10 @@ function MiniPlayer(props) {
   }, [togglePlayList]);
 
   return (
-    <CSSTransition 
-      in={!full} 
-      timeout={400} 
-      classNames="mini" 
+    <CSSTransition
+      in={!full}
+      timeout={400}
+      classNames="mini"
       onEnter={() => {
         miniPlayerRef.current.style.display = "flex";
       }}
@@ -43,10 +43,10 @@ function MiniPlayer(props) {
         </div>
         <div className="control">
           <ProgressCircle radius={32} percent={percent}>
-            { playing ? 
-              <i className="icon-mini iconfont icon-pause" onClick={e => clickPlaying(e, false)}>&#xe650;</i>
+            { playing ?
+              <i className="icon-mini iconfont icon-pause" onClick={e => clickPlaying(e, false)}>&#xe663;</i>
               :
-              <i className="icon-mini iconfont icon-play" onClick={e => clickPlaying(e, true)}>&#xe61e;</i> 
+              <i className="icon-mini iconfont icon-play" onClick={e => clickPlaying(e, true)}>&#xe63b;</i>
             }
           </ProgressCircle>
         </div>

@@ -58,8 +58,9 @@ export const ListHeader = styled.div `
     }
     .iconfont {
       margin-right: 10px;
-      font-size: ${style["font-size-ll"]};
+      font-size: 25px;
       color: ${style["theme-color"]};
+      vertical-align: -5px;
     }
 
     .clear{

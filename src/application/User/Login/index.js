@@ -15,7 +15,8 @@ const Login = props => {
     sentStatus,
     loginStatus,
     changeSentStatusDispatch,
-    history
+    history,
+    sentVcodeDispatch,
   } = props;
   const [inPhone, setInPhone] = useState(false);
   const [agreed, setAgreed] = useState(false);
@@ -80,6 +81,7 @@ const Login = props => {
             onClickBack={onPhoneBack}
             changeLogin={ChangeLoginPhoneDispatch}
             sentStatus={sentStatus}
+            sentVcode={(phone) => sentVcodeDispatch(phone)}
           />
         </LoginContainer>
       </CSSTransition>

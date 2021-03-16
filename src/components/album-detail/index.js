@@ -36,19 +36,19 @@ function AlbumDetail(props) {
     return (
       <Menu>
         <div>
-          <i className="iconfont">&#xe6ad;</i>
+          <i className="iconfont">&#xe638;</i>
           评论
         </div>
         <div>
-          <i className="iconfont">&#xe86f;</i>
+          <i className="iconfont">&#xe61e;</i>
           点赞
         </div>
         <div>
-          <i className="iconfont">&#xe62d;</i>
+          <i className="iconfont">&#xe6c9;</i>
           收藏
         </div>
         <div>
-          <i className="iconfont">&#xe606;</i>
+          <i className="iconfont">&#xe81a;</i>
           更多
         </div>
       </Menu>

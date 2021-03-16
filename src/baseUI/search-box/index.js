@@ -53,7 +53,7 @@ const SearchBox = (props) => {
 
   useEffect(() => {
     handleQueryDebounce(query);
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [query]);
 
   useEffect(() => {
@@ -76,14 +76,14 @@ const SearchBox = (props) => {
     queryRef.current.value = '';
     queryRef.current.focus();
   }
-  
+
   const displayStyle = query ? {display: 'block'}: {display: 'none'};
 
   return (
     <SearchBoxWrapper>
-      <i className="iconfont icon-back" onClick={() => props.back()}>&#xe655;</i>
+      <i className="iconfont icon-back" onClick={() => props.back()}>&#xe612;</i>
       <input ref={queryRef} className="box" placeholder="搜索歌曲、歌手、专辑" onChange={handleChange}/>
-      <i className="iconfont icon-delete" onClick={clearQuery} style={displayStyle}>&#xe600;</i>
+      <i className="iconfont icon-delete" onClick={clearQuery} style={displayStyle}>&#xe60a;</i>
     </SearchBoxWrapper>
   )
 };

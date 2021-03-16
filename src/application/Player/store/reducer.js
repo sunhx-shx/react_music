@@ -62,7 +62,7 @@ const handleDeleteSong = (state, song) => {
   const fpIndex = findIndex(song, playList);
   playList.splice(fpIndex, 1);
   if(fpIndex < currentIndex) currentIndex--;
-  
+
   const fsIndex = findIndex(song, sequenceList);
   sequenceList.splice(fsIndex, 1);
 

@@ -1,6 +1,6 @@
 import * as actionTypes from './constants';
 import { fromJS } from 'immutable';
-import { getBannerRequest, getRecommendListRequest } from '../../../api/request';
+import { getBannerRequest, getRecommendListRequest, getRecommendMusicVideoListRequest } from '../../../api/request';
 
 export const changeBannerList = (data) => ({
   type: actionTypes.CHANGE_BANNER,
@@ -9,6 +9,11 @@ export const changeBannerList = (data) => ({
 
 export const changeRecommendList = (data) => ({
   type: actionTypes.CHANGE_RECOMMEND_LIST,
+  data: fromJS(data)
+});
+
+export const changeRecommendMusicVideoList = (data) => ({
+  type: actionTypes.CHANGE_RECOMMEND_MUSICVIDEO_LIST,
   data: fromJS(data)
 });
 
@@ -24,7 +29,7 @@ export const getBannerList = () => {
       dispatch(action);
     }).catch(() => {
       console.log("轮播图数据传输错误");
-    }) 
+    })
   }
 };
 
@@ -32,9 +37,19 @@ export const getRecommendList = () => {
   return (dispatch) => {
     getRecommendListRequest().then(data => {
       dispatch(changeRecommendList(data.result));
-      dispatch(changeEnterLoading(false));
     }).catch(() => {
       console.log("推荐歌单数据传输错误");
+    });
+  }
+};
+
+export const getRecommendMusicVideoList = () => {
+  return (dispatch) => {
+    getRecommendMusicVideoListRequest().then(data => {
+      dispatch(changeRecommendMusicVideoList(data.result));
+      dispatch(changeEnterLoading(false));
+    }).catch(() => {
+      console.log("推荐MV数据传输错误");
     });
   }
 };

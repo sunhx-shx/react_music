@@ -24,7 +24,7 @@ const MusicNote = forwardRef((props, ref) => {
 
   const iconsRef = useRef();
 
-  const ICON_NUMBER = 10;
+  const ICON_NUMBER = 3;
 
   const transform = prefixStyle("transform");
 
@@ -33,14 +33,14 @@ const MusicNote = forwardRef((props, ref) => {
     let tempNode = document.createElement('div');
     tempNode.innerHTML = template;
     return tempNode.firstChild;
-  }
+  };
 
   useEffect(() => {
     for(let i = 0; i < ICON_NUMBER; i++){
-      let node = createNode(`<div class="iconfont">&#xe642;</div>`);
+      let node = createNode(`<div class="iconfont">&#xe724;</div>`);
       iconsRef.current.appendChild(node);
     }
-    let domArray = [].slice.call(iconsRef.current.children)
+    let domArray = [].slice.call(iconsRef.current.children);
     domArray.forEach(item => {
       item.running = false;
       item.addEventListener('transitionend', function() {
@@ -55,11 +55,11 @@ const MusicNote = forwardRef((props, ref) => {
     // eslint-disable-next-line
   }, []);
 
-  
+
   const startAnimation = ({x, y}) => {
     for(let i = 0; i < ICON_NUMBER; i++) {
-      let domArray = [].slice.call(iconsRef.current.children)
-      let item = domArray[i]
+      let domArray = [].slice.call(iconsRef.current.children);
+      let item = domArray[i];
       // 选择一个空闲的元素来开始动画
       if (item.running === false) {
         item.style.left = x + "px";
@@ -67,9 +67,9 @@ const MusicNote = forwardRef((props, ref) => {
         item.style.display = "inline-block";
         setTimeout(() => {
           item.running = true;
-          item.style[transform] = `translate3d(0, 750px, 0)`;
+          item.style[transform] = `translate3d(0, 700px, 0)`;
           let icon = item.querySelector("div");
-          icon.style[transform] = `translate3d(-40px, 0, 0)`;
+          icon.style[transform] = `translate3d(-50px, 0, 0)`;
         }, 20);
         break;
       }
@@ -79,7 +79,7 @@ const MusicNote = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     startAnimation
   }));
-  
+
   return (
     <Container ref={iconsRef}>
     </Container>

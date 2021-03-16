@@ -73,7 +73,7 @@ export const Top = styled.div`
     .iconfont {
       display: block;
       padding: 9px;
-      font-size: 24px;
+      font-size: 19px;
       color: ${style["font-color-desc"]};
       font-weight: bold;
       transform: rotate(90deg);

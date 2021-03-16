@@ -114,7 +114,7 @@ const Scroll = forwardRef((props, ref) => {
 
   useEffect(() => {
     if(!bScroll || !onScroll) return;
-    bScroll.on('scroll', onScroll)
+    bScroll.on('scroll', onScroll);
     return () => {
       bScroll.off('scroll', onScroll);
     }
@@ -150,9 +150,11 @@ const Scroll = forwardRef((props, ref) => {
 
 
   useEffect(() => {
-    if(refresh && bScroll){
-      bScroll.refresh();
-    }
+    setTimeout(() => {
+      if(refresh && bScroll){
+        bScroll.refresh();
+      }
+    }, 30);
   });
 
   useImperativeHandle(ref, () => ({
@@ -180,7 +182,7 @@ const Scroll = forwardRef((props, ref) => {
       <PullDownLoading style={ PullDowndisplayStyle }><Loading2></Loading2></PullDownLoading>
     </ScrollContainer>
   );
-})
+});
 
 Scroll.defaultProps = {
   direction: "vertical",
