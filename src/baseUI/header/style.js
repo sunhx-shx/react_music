@@ -14,12 +14,13 @@ export const HeaderContainer = styled.div`
   color: ${  props => props.addColor? "#ffffff" : style["font-color-light"] };
   .back{
     margin-left: 5px;
-    font-size: 20px;
     width: 20px;
+    color: ${  props => props.fontColor? "#2e2e2e" : "#ffffff" };
   }
   >h1{
     font-size: ${ props => props.addColor? style["font-size-ll"] : style["font-size-l"]};
     font-weight: 700;
+    color: ${  props => props.fontColor? "#2e2e2e" : "#ffffff" };
     width: ${  props => props.addColor? "85%" : "" };
     text-align: ${  props => props.addColor? "center" : "" };
   }

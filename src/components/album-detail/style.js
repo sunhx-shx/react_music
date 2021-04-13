@@ -95,6 +95,10 @@ export const TopDesc = styled.div`
         color: ${style["font-color-desc-v2"]};
       }
     }
+    .publishTime {
+      color: #9B9B9C;
+      font-size: 13px;
+    }
   }
 `
 

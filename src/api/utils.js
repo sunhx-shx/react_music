@@ -1,6 +1,6 @@
 import { RankTypes } from "./config";
-//防抖函数
 
+//防抖函数
 const debounce = (func, delay) => {
   let timer;
   return function (...args) {
@@ -71,6 +71,24 @@ export function prefixStyle(style) {
     return style;
   }
   return vendor + style.charAt(0).toUpperCase() + style.substr(1);
+}
+
+/*
+  *
+  * 13位时间戳转换标准时间
+  * timestamp：时间戳
+  *
+  * */
+export function timestampToTime(data) {
+  let date = new Date(data); // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  let Y = date.getFullYear() + '-';
+  let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+  let D = (date.getDate() + 1 < 10 ?  ('0' + date.getDate()) : date.getDate());
+  let h = date.getHours() + ':';
+  let m = date.getMinutes() + ':';
+  let s = date.getSeconds();
+  // return Y + M + D + h + m + s;
+  return Y + M + D;
 }
 
 //判断一个对象是否为空对象

@@ -15,11 +15,11 @@ function RecommendList(props) {
   const { recommendList, recommendMusicVideoList } = props;
 
   const enterDetail = (id) => {
-    props.history.push(`/recommend/music/${id}`);
+    props.history.push({ pathname: `/album/${id}`, state: { num: 1 } });
   };
 
   const enterVideoDetail = (id) => {
-    props.history.push(`/recommend/video/${id}`);
+    props.history.push(`/video/${id}`);
   };
 
   return (
@@ -55,7 +55,7 @@ function RecommendList(props) {
                 <VideoListItem key={item.id} onClick={() => enterVideoDetail(item.id)}>
                   <div className="img_wrapper">
                     <div className="decorate"></div>
-                    <LazyLoad offset={ -50 } placeholder={<img width="100%" height="100%" src={require('./atOnce.png')} alt="music"/>}>
+                    <LazyLoad offset={ -50 } placeholder={<img width="100%" height="100%" src={require('./atOnce.png')} alt="musicVideo"/>} overflow={true}>
                       <img src={ item.picUrl + "?param=400x200" } width="100%" height="100%" alt="music"/>
                     </LazyLoad>
                     <div className="play_count">

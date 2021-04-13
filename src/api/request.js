@@ -36,8 +36,15 @@ export const getMusicVideoComment = (id, pageData) => {
   }
 };
 
-export const getHotMusicVideoComment = (id, pageData) => {
-    return axiosInstance.get(`/comment/hot?id=${id}&type=1&before=${pageData}`);
+export const getHotMusicVideoComment = (id, offset, pageData) => {
+  if(pageData) {
+    let data = offset * 20;
+    return axiosInstance.get(`/comment/hot?id=${id}&type=1&limit=20&offset=${data}&before=${pageData}`);
+  }else {
+    let data = offset * 20;
+    return axiosInstance.get(`/comment/hot?id=${id}&type=1&limit=20&offset=${data}`);
+  }
+
 };
 
 
@@ -60,8 +67,24 @@ export const getAlbumDetailRequest = id => {
   return axiosInstance.get(`/playlist/detail?id=${id}`);
 };
 
+export const getSingerAlbumDetailRequest = id => {
+  return axiosInstance.get(`/album?id=${id}`);
+};
+
 export const getSingerInfoRequest = id => {
   return axiosInstance.get(`/artists?id=${id}`);
+};
+
+export const getSingerInfoDetailRequest = id => {
+  return axiosInstance.get(`/artist/desc?id=${id}`);
+};
+
+export const getSingerAlbumData = id => {
+  return axiosInstance.get(`/artist/album?id=${id}`);
+};
+
+export const getSingerMusicVideoData = id => {
+  return axiosInstance.get(`/artist/mv?id=${id}`);
 };
 
 export const getHotKeyWordsRequest = () => {

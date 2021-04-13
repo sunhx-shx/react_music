@@ -1,4 +1,4 @@
-import { CHANGE_ENTER_LOADING, CHANGE_WHETHER_LOADING, SET_CURRENT_MUSIC_VIDEO, SET_CURRENT_MUSIC_VIDEO_PLAY, SET_CURRENT_MUSIC_VIDEO_INFO, SET_CURRENT_SIMILAR_MUSIC_VIDEO, SET_CURRENT_MUSIC_VIDEO_COMMENT } from './constants';
+import { CHANGE_ENTER_LOADING, CHANGE_WHETHER_LOADING, CHANGE_STILL_LOADING, SET_CURRENT_MUSIC_VIDEO, SET_CURRENT_MUSIC_VIDEO_PLAY, SET_CURRENT_MUSIC_VIDEO_INFO, SET_CURRENT_SIMILAR_MUSIC_VIDEO, SET_CURRENT_MUSIC_VIDEO_COMMENT } from './constants';
 import { fromJS } from 'immutable';
 import { getMusicVideoDetail, getMusicVideoData, getMusicVideoInfoData, getSimilarMusicVideo, getMusicVideoComment, getHotMusicVideoComment } from '../../../api/request';
 
@@ -9,6 +9,11 @@ export const changeEnterLoading = (data) => ({
 
 export const changeWhetherLoading = (data) => ({
   type: CHANGE_WHETHER_LOADING,
+  data
+});
+
+export const changeStillLoading = (data) => ({
+  type: CHANGE_STILL_LOADING,
   data
 });
 
@@ -71,22 +76,20 @@ export const getMusicVideoCommentData = (id, isNewest, pageData) => {
     getMusicVideoComment(id, pageData).then(data => {
       if(pageData) {
         if(isNewest) {
-          const commentList = getState().getIn(['musicVideo', 'currentMusicVideoComment']).toJS();
-          let arr = [ ...commentList.concat([ ...data.comments ]) ];
-          dispatch(changeMusicVideoCommentData(arr));
-          dispatch(changeWhetherLoading(false));
+          if(data.comments.length < 20) {
+            dispatch(changeStillLoading(false));
+          }else {
+            const commentList = getState().getIn(['musicVideo', 'currentMusicVideoComment']).toJS();
+            let arr = [ ...commentList.concat([ ...data.comments ]) ];
+            dispatch(changeMusicVideoCommentData(arr));
+            dispatch(changeWhetherLoading(false));
+          }
         }
       }else {
         if(isNewest) {
           dispatch(changeMusicVideoCommentNull());
           const commentList = getState().getIn(['musicVideo', 'currentMusicVideoComment']).toJS();
           let arr = [ ...commentList.concat([ ...data.comments ]) ];
-          dispatch(changeMusicVideoCommentData(arr));
-          dispatch(changeWhetherLoading(false));
-        }else {
-          dispatch(changeMusicVideoCommentNull());
-          const commentList = getState().getIn(['musicVideo', 'currentMusicVideoComment']).toJS();
-          let arr = [ ...commentList.concat([ ...data.hotComments ]) ];
           dispatch(changeMusicVideoCommentData(arr));
           dispatch(changeWhetherLoading(false));
         }
@@ -96,13 +99,25 @@ export const getMusicVideoCommentData = (id, isNewest, pageData) => {
   }
 };
 
-export const getMoreHotMusicVideoComment = (id, pageData) => {
+export const getMoreHotMusicVideoComment = (id, offSet, pageData) => {
   return (dispatch, getState) => {
-    getHotMusicVideoComment(id, pageData).then(data => {
-      const commentList = getState().getIn(['musicVideo', 'currentMusicVideoComment']).toJS();
-      let arr = [ ...commentList.concat([ ...data.hotComments ]) ];
-      dispatch(changeMusicVideoCommentData(arr));
-      dispatch(changeWhetherLoading(false));
+    getHotMusicVideoComment(id, offSet, pageData).then(data => {
+      if(pageData) {
+        if(data.hotComments.length < 20) {
+          dispatch(changeStillLoading(false));
+        }else {
+          const commentList = getState().getIn(['musicVideo', 'currentMusicVideoComment']).toJS();
+          let arr = [ ...commentList.concat([ ...data.hotComments ]) ];
+          dispatch(changeMusicVideoCommentData(arr));
+          dispatch(changeWhetherLoading(false));
+        }
+      }else {
+        dispatch(changeMusicVideoCommentNull());
+        const commentList = getState().getIn(['musicVideo', 'currentMusicVideoComment']).toJS();
+        let arr = [ ...commentList.concat([ ...data.hotComments ]) ];
+        dispatch(changeMusicVideoCommentData(arr));
+        dispatch(changeWhetherLoading(false));
+      }
     });
   };
 };

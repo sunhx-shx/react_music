@@ -53,7 +53,6 @@ function Recommend(props){
         </div>
       </Scroll>
       {enterLoading? <EnterLoading><Loading></Loading></EnterLoading> : null}
-      { renderRoutes(props.route.routes) }
     </Content>
   );
 }

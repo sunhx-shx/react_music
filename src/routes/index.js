@@ -42,16 +42,16 @@ export default [
             path: "/recommend",
             component: SuspenseComponent(RecommendComponent),
             key: "recommend",
-            routes: [
-              {
-                path: "/recommend/music/:id",
-                component: SuspenseComponent(AlbumComponent),
-              },
-              {
-                path: "/recommend/video/:id",
-                component: SuspenseComponent(VideoComponent),
-              }
-            ]
+          },
+          {
+            path: "/music/:id",
+            component: SuspenseComponent(AlbumComponent),
+            key: "music"
+          },
+          {
+            path: "/video/:id",
+            component: SuspenseComponent(VideoComponent),
+            key: "video"
           },
           {
             path: "/singers",

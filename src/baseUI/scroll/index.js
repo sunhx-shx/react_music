@@ -154,7 +154,7 @@ const Scroll = forwardRef((props, ref) => {
       if(refresh && bScroll){
         bScroll.refresh();
       }
-    }, 30);
+    }, 50);
   });
 
   useImperativeHandle(ref, () => ({
@@ -168,13 +168,27 @@ const Scroll = forwardRef((props, ref) => {
       if(bScroll) {
         return bScroll;
       }
+    },
+    scrollMoreTo() {
+      if(bScroll) {
+        bScroll.scrollTo(0, 0);
+      }
+    },
+    noScroll() {
+      if(bScroll) {
+        bScroll.disable();
+      }
+    },
+    toScroll() {
+      bScroll.enable();
     }
+
   }));
 
   const PullUpdisplayStyle = pullUpLoading ? { display: "" } : { display: "none" };
   const PullDowndisplayStyle = pullDownLoading ? { display: "" } : { display: "none" };
   return (
-    <ScrollContainer ref={scrollContaninerRef}>
+    <ScrollContainer ref={scrollContaninerRef} className="myScroll">
       {props.children}
       {/* 滑到底部加载动画 */}
       <PullUpLoading style={ PullUpdisplayStyle }><Loading></Loading></PullUpLoading>

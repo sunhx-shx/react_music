@@ -9,6 +9,7 @@ const defaultState = fromJS({
   similarMusicVideo: {},
   playing: false,
   enterLoading: false,
+  stillLoad: true,
   whetherLoading: false,
 });
 
@@ -20,6 +21,8 @@ export default (state = defaultState, action) => {
       return state.set('enterLoading', action.data);
     case actionTypes.CHANGE_WHETHER_LOADING:
       return state.set('whetherLoading', action.data);
+    case actionTypes.CHANGE_STILL_LOADING:
+      return state.set('stillLoad', action.data);
     case actionTypes.SET_CURRENT_MUSIC_VIDEO:
       return state.set('currentMusicVideo', action.data);
     case actionTypes.SET_CURRENT_MUSIC_VIDEO_PLAY:

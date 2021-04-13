@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useLocation } from "react-router-dom";
 import { Container } from "./style";
 import { CSSTransition } from "react-transition-group";
 import Scroll from '../../baseUI/scroll/index';
 import style from "../../assets/global-style";
 import { connect } from 'react-redux';
-import { getAlbumList, changePullUpLoading, changeEnterLoading } from './store/actionCreators';
+import { getAlbumList, getSingerAlbumData, changePullUpLoading, changeEnterLoading, changeCurrentAlbum } from './store/actionCreators';
 import { EnterLoading } from './../Singers/style';
 import Loading from './../../baseUI/loading/index';
 import  Header  from './../../baseUI/header/index';
 import AlbumDetail from '../../components/album-detail/index';
 import { HEADER_HEIGHT } from './../../api/config';
 import MusicNote from '../../baseUI/music-note/index';
-import { isEmptyObject } from '../../api/utils';
 
 function Album(props) {
 
@@ -23,15 +23,26 @@ function Album(props) {
   const headerEl = useRef();
 
   const id = props.match.params.id;
+  const num = useLocation().state.num;
 
   const { currentAlbum, enterLoading, pullUpLoading, songsCount } = props;
-  const { getAlbumDataDispatch, changePullUpLoadingStateDispatch } = props;
+  const { getAlbumDataDispatch, changePullUpLoadingStateDispatch, getSingerAlbumDataDispatch, resetCurrentAlbum } = props;
 
   let currentAlbumJS = currentAlbum.toJS();
 
   useEffect(() => {
-    getAlbumDataDispatch(id);
-  }, [getAlbumDataDispatch, id]);
+    if(num !== 0) {
+      if(num === 1) {
+        getAlbumDataDispatch(id);
+      }else {
+        getSingerAlbumDataDispatch(id);
+      }
+    }
+    return () => {
+      resetCurrentAlbum();
+    }
+  }, [getSingerAlbumDataDispatch, resetCurrentAlbum, num, getAlbumDataDispatch, id]);
+
 
 
   const handleScroll = useCallback((pos) => {
@@ -75,13 +86,16 @@ function Album(props) {
       >
         <Container play={songsCount}>
           <Header ref={headerEl} title={title} handleClick={handleBack} isMarquee={isMarquee}></Header>
-          { enterLoading ?  <EnterLoading><Loading></Loading></EnterLoading> : <Scroll
+          { enterLoading ?
+            <EnterLoading><Loading></Loading></EnterLoading>
+            :
+            <Scroll
             onScroll={handleScroll}
             pullUp={handlePullUp}
             pullUpLoading={pullUpLoading}
             bounceTop={false}
           >
-              { Object.keys(currentAlbumJS).length > 0? <AlbumDetail currentAlbum={currentAlbumJS} pullUpLoading={pullUpLoading} musicAnimation={musicAnimation}></AlbumDetail> : null }
+              { Object.keys(currentAlbumJS).length > 0? <AlbumDetail currentAlbum={currentAlbumJS} num={num} pullUpLoading={pullUpLoading} musicAnimation={musicAnimation}></AlbumDetail> : null }
           </Scroll>}
           <MusicNote ref={musicNoteRef}></MusicNote>
         </Container>
@@ -104,8 +118,15 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(changeEnterLoading(true));
       dispatch(getAlbumList(id));
     },
+    getSingerAlbumDataDispatch(id) {
+      dispatch(changeEnterLoading(true));
+      dispatch(getSingerAlbumData(id));
+    },
     changePullUpLoadingStateDispatch(state) {
       dispatch(changePullUpLoading(state));
+    },
+    resetCurrentAlbum() {
+      dispatch(changeCurrentAlbum({}));
     }
   }
 };

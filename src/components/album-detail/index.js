@@ -1,32 +1,34 @@
 import React from 'react';
 import { TopDesc, Menu } from './style';
+import { timestampToTime } from '../../api/utils';
 import SongsList from '../../application/SongList/';
 
 function AlbumDetail(props) {
-  const { currentAlbum, pullUpLoading } = props;
+  const { currentAlbum, pullUpLoading, num } = props;
 
   const renderTopDesc = () => {
     return (
-      <TopDesc background={currentAlbum.coverImgUrl}>
+      <TopDesc background={ num === 1 ? currentAlbum.coverImgUrl : currentAlbum.picUrl }>
         <div className="background">
           <div className="filter"></div>
         </div>
         <div className="img_wrapper">
           <div className="decorate"></div>
-          <img src={currentAlbum.coverImgUrl} alt=""/>
-          <div className="play_count">
+          <img src={ num === 1 ? currentAlbum.coverImgUrl : currentAlbum.picUrl } alt=""/>
+          <div className="play_count" style={{ display: num === 1 ? "block" : "none" }}>
             <i className="iconfont play">&#xe885;</i>
-            <span className="count">{Math.floor(currentAlbum.subscribedCount/1000)/10}万</span>
+            <span className="count">{Math.floor(currentAlbum.playCount/1000)/10}万</span>
           </div>
         </div>
         <div className="desc_wrapper">
           <div className="title">{currentAlbum.name}</div>
           <div className="person">
             <div className="avatar">
-              <img src={currentAlbum.creator.avatarUrl} alt=""/>
+              <img src={ num === 1? currentAlbum.creator.avatarUrl : currentAlbum.artist.picUrl } alt=""/>
             </div>
-            <div className="name">{currentAlbum.creator.nickname}</div>
+            <div className="name">{ num === 1? currentAlbum.creator.nickname : currentAlbum.artist.name }</div><br />
           </div>
+          <div className="publishTime" style={{ display: num === 2 ? "block" : "none" }}>{ `发行时间：${timestampToTime(currentAlbum.publishTime)}` }</div>
         </div>
       </TopDesc>
     )
@@ -37,15 +39,15 @@ function AlbumDetail(props) {
       <Menu>
         <div>
           <i className="iconfont">&#xe638;</i>
-          评论
+          { num === 1? currentAlbum.commentCount : currentAlbum.info.commentCount }评论
         </div>
         <div>
           <i className="iconfont">&#xe61e;</i>
-          点赞
+          {  num === 1? currentAlbum.shareCount : currentAlbum.info.shareCount }点赞
         </div>
         <div>
           <i className="iconfont">&#xe6c9;</i>
-          收藏
+          { num === 1? currentAlbum.trackCount : currentAlbum.info.mark }收藏
         </div>
         <div>
           <i className="iconfont">&#xe81a;</i>
@@ -57,8 +59,8 @@ function AlbumDetail(props) {
   const renderSongList = () => {
     return (
       <SongsList
-        songs={currentAlbum.tracks}
-        collectCount={currentAlbum.subscribedCount}
+        songs={ num === 1? currentAlbum.tracks : currentAlbum.songs}
+        collectCount={currentAlbum.trackCount}
         showCollect={true}
         loading={pullUpLoading}
         musicAnimation={props.musicAnimation}

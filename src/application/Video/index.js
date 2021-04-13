@@ -31,6 +31,7 @@ function VideoComponent(props) {
 
   const [ showStatus, setShowStatus ] = useState(true);
   const [ isNewest, setIsNewest ] = useState(true);
+  const [ offSet, setOffSet ] = useState(0);
   const id = props.match.params.id;
   const test = useRef();
   const didMountRef = useRef(false);
@@ -68,7 +69,7 @@ function VideoComponent(props) {
   };
 
   const enterSimilarVideoDetail = (id) => {
-    history.push(`/recommend/video/${id}`);
+    history.push(`/video/${id}`);
     test.current.refresh();
   };
 
@@ -81,14 +82,17 @@ function VideoComponent(props) {
   };
 
   const loadMoreComment = () => {
-    if(!tabShow) {
-      if(currentMusicVideoCommentJS.length > 0) {
-        if(isNewest) {
-          let pageData = currentMusicVideoCommentJS[currentMusicVideoCommentJS.length - 1].time;
-          changeCommentType(id, isNewest, pageData);
-        }else {
-          let pageData = currentMusicVideoCommentJS[currentMusicVideoCommentJS.length - 1].time;
-          getMoreHotComment(id, pageData);
+    if(currentMusicVideoCommentJS.length < 20) {
+      return false;
+    }else {
+      if(!tabShow) {
+        if(currentMusicVideoCommentJS.length > 0) {
+          if(isNewest) {
+            let pageData = currentMusicVideoCommentJS[currentMusicVideoCommentJS.length - 1].time;
+            changeCommentType(id, isNewest, pageData);
+          }else {
+            setOffSet(offSet +1);
+          }
         }
       }
     }
@@ -96,7 +100,21 @@ function VideoComponent(props) {
 
   useEffect(() => {
     if(didMountRef.current) {
-      changeCommentType(id, isNewest);
+      let pageData = currentMusicVideoCommentJS[currentMusicVideoCommentJS.length - 1].time;
+      getMoreHotComment(id, offSet, pageData);
+    }else {
+      didMountRef.current = true;
+    }
+    // eslint-disable-next-line
+  }, [ offSet ]);
+
+  useEffect(() => {
+    if(didMountRef.current) {
+      if(isNewest) {
+        changeCommentType(id, isNewest);
+      }else {
+        getMoreHotComment(id, offSet);
+      }
     }else {
       didMountRef.current = true;
     }
@@ -123,7 +141,7 @@ function VideoComponent(props) {
               return (
                 <div className="videoItem" key={item.id} onClick={ () => { enterSimilarVideoDetail(item.id) } }>
                   <div className="cover">
-                    <LazyLoad placeholder={<img width="100%" height="100%" src={require('../../components/list/atOnce.png')} alt="music"/>}>
+                    <LazyLoad placeholder={<img width="100%" height="100%" src={require('./atOnce.png')} alt="music"/>} overflow={true}>
                       <img src={ item.cover } width="100%" height="100%" alt="video_cover"/>
                     </LazyLoad>
                     <div className="play_count">
@@ -216,7 +234,7 @@ function VideoComponent(props) {
                   currentMusicVideoCommentJS.length > 0?
                     currentMusicVideoCommentJS.map( item => {
                       return (
-                        <div className="commentItem" key={ item.time }>
+                        <div className="commentItem" key={ item.commentId }>
                           <div className="moreInfo">
                             <div className="avtar">
                               <img src={ item.user.avatarUrl } width="100%" height="100%" alt="avatar"/>
@@ -234,7 +252,9 @@ function VideoComponent(props) {
                       )
                     }) : <h1>暂无相关评论！</h1>
                  }
-
+                {
+                  currentMusicVideoCommentJS.length < 20 && currentMusicVideoCommentJS.length > 0? <h2 style={{ textAlign: 'center', color: '#999999', padding: '10px 0' }}> — 暂无更多评论了！— </h2> : null
+                }
               </TabItemContainer>
             </Main>
         </Scroll>}
@@ -273,9 +293,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getMusicVideoCommentData(id, data, pageData));
     },
 
-    getMoreHotComment(id, pageData) {
+    getMoreHotComment(id, offSet, pageData) {
       dispatch(changeWhetherLoading(true));
-      dispatch(getMoreHotMusicVideoComment(id, pageData));
+      dispatch(getMoreHotMusicVideoComment(id, offSet, pageData));
     },
   }
 };
