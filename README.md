@@ -69,7 +69,7 @@ $ npm start
 
 
 
-![Iamge]http://www.sunhx.co/singer_mv.jpg)
+![Iamge](http://www.sunhx.co/singer_mv.jpg)
 
 
 
