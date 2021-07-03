@@ -37,7 +37,7 @@ $ npm start
 
 首页推荐:
 
-![](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/mv_index.png)
+![Iamge](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/mv_index.png)
 
 
 
@@ -45,7 +45,7 @@ $ npm start
 #### 2、MV详情部分
 
 
-![](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/mv_page.jpg)
+![Iamge](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/mv_page.jpg)
 
 这里使用了video-react播放器组件，实现了mv的播放控制和redux中相关播放状态以及数据的交互
 
@@ -55,7 +55,7 @@ $ npm start
 
 #### 3、MV评论部分
 
-![](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/mv_comment.jpg)
+![Iamge](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/mv_comment.jpg)
 
 这里做了异步加载的处理，上拉到底进行新数据的获取，下拉则进行数据的重新加载。
 
@@ -65,11 +65,11 @@ $ npm start
 
 #### 4、歌手详情部分
 
-![](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/singer_album.jpg)
+![Iamge](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/singer_album.jpg)
 
 
 
-![](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/singer_mv.jpg)
+![Iamge](https://raw.githubusercontent.com/sunhx-shx/webpack/master/img/singer_mv.jpg)
 
 
 
