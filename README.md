@@ -45,7 +45,7 @@ $ npm start
 #### 2、MV详情部分
 
 
-![Iamge](https://www.sunhx.co/mv_page.jpg)
+![Iamge](https://www.sunhx.co/mv-page.jpg)
 
 这里使用了video-react播放器组件，实现了mv的播放控制和redux中相关播放状态以及数据的交互
 
@@ -55,7 +55,7 @@ $ npm start
 
 #### 3、MV评论部分
 
-![Iamge](https://www.sunhx.co/mv_comment.jpg)
+![Iamge](https://www.sunhx.co/mv-comment.jpg)
 
 这里做了异步加载的处理，上拉到底进行新数据的获取，下拉则进行数据的重新加载。
 
@@ -65,11 +65,11 @@ $ npm start
 
 #### 4、歌手详情部分
 
-![Iamge](https://www.sunhx.co/singer_album.jpg)
+![Iamge](https://www.sunhx.co/singer-album.jpg)
 
 
 
-![Iamge](https://www.sunhx.co/singer_mv.jpg)
+![Iamge](https://www.sunhx.co/singer-mv.jpg)
 
 
 
