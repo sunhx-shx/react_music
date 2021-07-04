@@ -37,7 +37,7 @@ $ npm start
 
 首页推荐:
 
-![Iamge](https://www.sunhx.co/mv-index.png)
+![Iamge](http://www.sunhx.co/mv-index.png)
 
 
 
